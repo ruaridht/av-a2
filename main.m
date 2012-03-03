@@ -77,27 +77,36 @@ function ret = main()
   p_test = [];
   s_test = [];
   r_test = [];
-  for i = 1 : 24
+  pt_num = 4;
+  st_num = 2;
+  rt_num = 2;
+  
+  % repopulate the moms and easily choose test mom
+  for i = 1 : 8
     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i<8)
-      naive_training = [naive_training ; mom];
-    end
-    if (i==8)
+    if (i==pt_num)
       p_test = mom;
-    end
-    
-    if (i>8 && i<16)
+    else
       naive_training = [naive_training ; mom];
+%       p_moms = [p_moms ; mom];
     end
-    if (i==16)
+  end
+  for i = 9 : 16
+    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+    if (i==(st_num+8))
       s_test = mom;
-    end
-    
-    if (i>16 && i<24)
+    else
       naive_training = [naive_training ; mom];
+%       s_moms = [s_moms ; mom];
     end
-    if (i==24)
+  end
+  for i = 17 : 24
+    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+    if (i==(rt_num+16))
       r_test = mom;
+    else
+      naive_training = [naive_training ; mom];
+%       r_moms = [r_moms ; mom];
     end
   end
   

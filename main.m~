@@ -77,32 +77,62 @@ function ret = main()
   p_test = [];
   s_test = [];
   r_test = [];
-  for i = 1 : 24
+  pt_num = 8;
+  st_num = 16;
+  rt_num = 
+  
+  % repopulate the moms and easily choose test mom
+  for i = 1 : 8
     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i<8)
-      naive_training = [naive_training ; mom];
-      naive_classes{i} = 'paper';
-    end
-    if (i==8)
+    if (i==pt_num)
       p_test = mom;
-    end
-    
-    if (i>8 && i<16)
-      naive_training = [naive_training ; mom];
-      
+    else
+      p_moms = [p_moms ; mom];
     end
   end
+  for i = 9 : 16
+    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+    if (i==st_num)
+      s_test = mom;
+    else
+      s_moms = [s_moms ; mom];
+    end
+  end
+  for i = 17 : 24
+    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+    if (i==rt_num)
+      r_test = mom
+    else
+      r_moms = [r_moms ; mom];
+    end
+  end
+  
+  for i=1 : 21
+    if (i<=7)
+      naive_classes{i} = 'paper';
+    end
+    if (i>7 && i<=14)
+      naive_classes{i} = 'scissors';
+    end
+    if (i>14)
+      naive_classes{i} = 'rock';
+    end
+  end
+  % end of hardcoding
   
   pp = 'Starting bayes'
   
   nc = naive_classes';
   
+  % only needed to do this once
   % save 'naive_training.txt' naive_training '-ASCII';
   
   % create a naive bayes classifier and fit our trainig data.
   nb = NaiveBayes.fit(naive_training, nc);
-
-  %mvec = createMeanVector(paper_moms);
+  
+  pt = nb.predict(p_test)
+  st = nb.predict(s_test)
+  rt = nb.predict(r_test)
   
   ret = nb;
   
