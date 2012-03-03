@@ -1,0 +1,23 @@
+function com = centerofmass(bwim, loc)
+    % image: grab the object from bwlabeled image.
+    bwim 
+    image = imsections(bwim,loc);
+    [H,W] = size(image);
+    area = bearea(image);
+    
+    % r: the sum of the height
+    % c: the sum of the width
+    r = 0;
+    c = 0;
+    
+    % Calculate 
+    for x = 1 : W
+        for y = 1 : H
+               r = r + y*image(y,x);
+               c = c + x*image(y,x);
+        end
+    end
+
+    % Get the averages (dividing by the area) and return them.
+    com = [round(r/area) round(c/area)];
+end
