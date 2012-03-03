@@ -1,16 +1,23 @@
-function binimage = bgremove (partim, bgim)
+function binimage = bgremove (partim, bgims)
 
     T = double(min(double(min(min(partim))+(max(max(partim))-min(min(partim)))/2))/255);
 
     %detect change in red, green and blue values. Makes WxHx3 image
-    [H,W] = size(partim);
-    outim = zeros(H,W);
-    for r = 1 : H
-    for c = 1 : W
-      if abs(double(bgim(r,c)) - double(partim(r,c))) > T*50
-          outim(r,c) = double(1);
-      end
-    end
+    n = numel(bgims);
+    for i = 1 : n
+        
+        bgim = bgims(i);
+        bgim = cell2mat(bgim);
+        
+        [H,W] = size(partim);
+        outim = zeros(H,W);
+        for r = 1 : H
+        for c = 1 : W
+          if abs(double(bgim(r,c)) - double(partim(r,c))) > T*50
+              outim(r,c) = double(1);
+          end
+        end
+        end
     end
 
 

@@ -1,4 +1,4 @@
-function images = removeBackgroundFromImageSet( bgImage, imageDir )
+function images = removeBackgroundFromImageSet( bgImages, imageDir )
 
     imagefiles = dir(strcat(imageDir,'*.jpg'));  % collect all images in specified directory
     nfiles = length(imagefiles);    % number of files found
@@ -12,10 +12,11 @@ function images = removeBackgroundFromImageSet( bgImage, imageDir )
        currentimage = imread(filepath);
        
        %remove bg
-       currentimage = bgremove(currentimage,bgImage);
+       currentimage = bgremove(currentimage,bgImages);
        
        %clean image
-       currentimage = cleanup(currentimage,3,3,0);
+       currentimage = cleanup(currentimage,3,0,0);
+       currentimage = bwareaopen(currentimage,700);
        
        %store the image
        images{i} = currentimage;
