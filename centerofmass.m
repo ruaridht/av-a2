@@ -1,4 +1,4 @@
-function com = centerofmass(im)
+function [rbar cbar] = centerofmass(im)
     [H,W] = size(im);
     
     % r: the sum of the height
@@ -20,5 +20,7 @@ function com = centerofmass(im)
     end
 
     % Get the averages (dividing by the area) and return them.
-    com = [round(r/area) round(c/area)];
+    rbar = round(r/area);
+    cbar = round(c/area);
+    com = [rbar cbar];
 end
