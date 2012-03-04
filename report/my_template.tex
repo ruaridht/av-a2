@@ -1,0 +1,92 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{appendix}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\usepackage[margin=10pt,small,bf]{caption}
+
+\sloppy         % better line breaks
+
+%% VARIABLES
+%% Change these for your report
+
+\def\thepretitle{Advanced Vision}
+\def\themaintitle{Practical 2}
+\def\thesubtitle{Rock Paper Scissors Classifier}
+\def\firstname{Luke Brown}
+\def\lastname{Ruaridh Thomson}
+
+% end of settable variables. Head on down to line 84 where the stuff starts.
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % required for title page.
+
+% font stuff
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont{Minion Pro}
+\setmonofont[Scale=0.8]{Menlo}
+
+% layout, ripped from interspeech
+\oddsidemargin -0.20in
+\evensidemargin -0.20in
+\topmargin 0truept 
+\headheight 0truept
+\footskip 0truept
+\textheight 235truemm
+\textwidth 170truemm
+\voffset -41truept
+\headsep 43truept
+
+% header
+\pagestyle{myheadings}
+
+%
+% DOCUMENT STARTS
+%
+
+\begin{document}
+
+% TITLE PAGE
+\begin{titlepage}
+\begin{center}
+% Upper part of the page
+\includegraphics[width=0.45\textwidth]{uoe.jpg}\\[2cm]
+\textsc{\LARGE \thepretitle}\\[1.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries \themaintitle}\\[0.5cm]
+{ \large \bfseries \thesubtitle}\\
+\HRule \\[1.5cm]
+
+\emph{Author:}\\ % start of team list, 2 minipages for placement
+
+\firstname\textsc{ \lastname}\\
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+\end{titlepage}
+% END TITLE PAGE
+
+\columnsep 10truemm
+\twocolumn
+
+\tableofcontents
+
+\pagebreak
+
+\section{Introduction}
+\section{Conclusion}
+
+\onecolumn
+\newpage
+\appendix
+\appendixpage
+
+\end{document}

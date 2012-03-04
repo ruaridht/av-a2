@@ -1,3 +1,4 @@
+% We have altered getproperties.m to work for our MHI images.
 function vec = getMomentInvDesc( Image )
 
   [H,W] = size(Image);

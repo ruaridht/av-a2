@@ -1,5 +1,4 @@
-% This function isn't even used anymore since we use MATLAB's built in
-% Naïve Bayes classifier.
+% This function isn't even used anymore since we use MATLAB's built in Nai
 function mvec = createMeanVector( vecs )
   
   new_vecs = cell2mat(vecs);
