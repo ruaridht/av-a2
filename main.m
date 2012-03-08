@@ -82,7 +82,7 @@ function ret = main()
 %   pp = 'Done with rock'
   
   % load the pre-calculated moment invariant descriptors
-  all_moms = importdata('naive_training.txt');
+  all_moms = importdata('naive_training.midhalf.txt');
   p_test = [];
   s_test = [];
   r_test = [];
