@@ -1,0 +1,3 @@
+Paper prediction: rock
+Scissors prediction: paper
+Rock prediction: rock

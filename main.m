@@ -86,9 +86,9 @@ function ret = main()
   p_test = [];
   s_test = [];
   r_test = [];
-  pt_num = 4;
-  st_num = 2;
-  rt_num = 2;
+  pt_num = 2;
+  st_num = 3;
+  rt_num = 4;
   
   % repopulate the moms and easily choose test mom
   for i = 1 : 8

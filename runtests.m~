@@ -1,0 +1,32 @@
+% Here we run the classifier for all data and record the data to a file.
+
+i = 1;
+j = 1;
+k = 1;
+
+[ ptr str rtr ] = maintest(i,j,k);
+
+filename = strcat('results/',int2str(i), '_', int2str(j), '_', int2str(k), '.txt');
+fileID = fopen(filename,'w');
+fprintf(fileID,'Paper prediction: %s\n', ptr{1});
+fprintf(fileID,'Scissors prediction: %s\n', str{1});
+fprintf(fileID,'Rock prediction: %s', rtr{1});
+fclose(fileID);
+
+% For all paper train/test combinations
+% for i = 1 : 8
+%   
+%   % For all scissors train/test combinations
+%   for j = 1 : 8
+%     
+%     % For all rock train/test combinations
+%     for k = 1 : 8
+%       
+%       [ ptr str rtr ] = maintest(i,j,k);
+%       
+%       filename = strcat(i, '_', j, '_', k, '.txt');
+%       save 'naive_training.txt' naive_training '-ASCII';
+%       
+%     end
+%   end
+% end
