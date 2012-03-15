@@ -1,0 +1,15 @@
+main()
+	for each of {rock, paper, scissors}
+		remove background from all images in sets
+		get the bounding box for each sequence
+			(bounding box for bounding boxes of all frames)
+		create MHI for a sequence
+		get moment invariant descriptors for each mhi
+		use moments as the feature vector for each sequence
+
+
+main('filename to store training data')
+runtests('directory to save data in', 'filename of training data')
+	maintest(i,j,k,'filename of training data')
+		where i,j,k are the tests sequences
+evaluate('directory of saved data')

@@ -16,15 +16,4 @@ function muv = complexmoment(Image,u,v)
   end
   
   muv = c_uv_sum;
-  
-%   [r,c] = find(Image>0); % get (r,c) of region's pixels
-%   
-%   n = length(r);
-%   momlist = zeros(n,1);
-%   for i = 1 : n
-%     c1 = complex(r(i) - rbar,c(i) - cbar);
-%     c2 = complex(r(i) - rbar,cbar - c(i));
-%     momlist(i) = (c1^u * c2^v) * Image(r(i),c(i));
-%   end
-%   muv = sum(momlist);
 end

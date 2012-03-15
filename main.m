@@ -1,5 +1,5 @@
 % This is a support function that calls everything we need.
-function ret = main()
+function [res mhi] = main(fname)
   bg = imread('background1.jpg');
   bg2 = imread('background2.jpg');
   bgs = { bg bg2 };
@@ -16,9 +16,6 @@ function ret = main()
   
   % define what we need for the Naïve Bayes classifier
   naive_training = [];
-  naive_classes = {};
-  cc = 1;
-  
   
   sizey = size(train_sets_paper);
   tnum = sizey(2); % 7
@@ -27,7 +24,7 @@ function ret = main()
   % descriptors for all the training images.
   % what we have done is run this once for all image sets and stored the
   % outcome in a file, saving us calculating this every time we run.
-%   % for paper
+  % for paper
 %   for i = 1 : tnum
 %     im_dir = strcat('av212data/train/', train_sets_paper{i});
 %     images = removeBackgroundFromImageSet(bgs, im_dir);
@@ -38,8 +35,6 @@ function ret = main()
 % 
 %     p_moms = [p_moms ; mhi_moms];
 %     naive_training = [naive_training ; mhi_moms];
-%     naive_classes{cc} = 'paper';
-%     cc = cc + 1;
 %     pp = i % this gives us an idea of how long things are taking
 %   end
 %   
@@ -56,8 +51,6 @@ function ret = main()
 % 
 %     s_moms = [s_moms ; mhi_moms];
 %     naive_training = [naive_training ; mhi_moms];
-%     naive_classes{cc} = 'scissors';
-%     cc = cc + 1;
 %     pp = i
 %   end
 %   
@@ -74,78 +67,59 @@ function ret = main()
 % 
 %     r_moms = [r_moms ; mhi_moms];
 %     naive_training = [naive_training ; mhi_moms];
-%     naive_classes{cc} = 'rock';
-%     cc = cc + 1;
 %     pp = i
 %   end
-%   
-%   pp = 'Done with rock'
   
+  %pp = 'Done with rock'
+
+%   im_dir = strcat('av212test/t1/', train_sets_paper{i});
+  images = removeBackgroundFromImageSet(bgs, 'av212test/t2/');
+
+  [l u r d] = getSequenceBoundingBox(images);
+  mhi = createMHI(images, [l u r d]);
+  mhi_moms = getMomentInvDesc(mhi);
+  
+  pp = 'Done with data'
+  
+  naive_training = [];
+  naive_classes = {};
+  
+  % fname = 'naive_training.txt';
   % load the pre-calculated moment invariant descriptors
-  all_moms = importdata('naive_training.midhalf.txt');
-  p_test = [];
-  s_test = [];
-  r_test = [];
-  pt_num = 2;
-  st_num = 3;
-  rt_num = 4;
+  all_moms = importdata(fname);
   
-  % repopulate the moms and easily choose test mom
-  for i = 1 : 8
+  for i = 1 : 24
     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i==pt_num)
-      p_test = mom;
-    else
-      naive_training = [naive_training ; mom];
-    end
-  end
-  for i = 9 : 16
-    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i==(st_num+8))
-      s_test = mom;
-    else
-      naive_training = [naive_training ; mom];
-    end
-  end
-  for i = 17 : 24
-    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i==(rt_num+16))
-      r_test = mom;
-    else
-      naive_training = [naive_training ; mom];
-    end
+    
+    naive_training = [naive_training ; mom];
   end
   
   % there are 7 of each class used to train the classifier
-  for i=1 : 21
-    if (i<=7)
+  for i=1 : 24
+    if (i<=8)
       naive_classes{i} = 'paper';
     end
-    if (i>7 && i<=14)
+    if (i>8 && i<=16)
       naive_classes{i} = 'scissors';
     end
-    if (i>14)
+    if (i>16)
       naive_classes{i} = 'rock';
     end
   end
   
-  pp = 'Starting bayes'
+  % fname = naive_training.firsthalf.txt
+  % only needed to do this once, or the image processing is changed.
+  %save 'naive_training.midthird.txt' naive_training '-ASCII';
   
   nc = naive_classes';
-  
-  % only needed to do this once, or the image processing is changed.
-  % save 'naive_training.txt' naive_training '-ASCII';
   
   % create a naive bayes classifier and fit our training data.
   nb = NaiveBayes.fit(naive_training, nc);
   
   % make predictions on our test data.
-  pt = nb.predict(p_test)
-  st = nb.predict(s_test)
-  rt = nb.predict(r_test)
+  res = nb.predict(mhi_moms)
   
-  % we return the Naïve Bayes classifier for test purposes.
-  ret = nb;
+  pp = fname;
   
 end
 

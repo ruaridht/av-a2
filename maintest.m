@@ -1,4 +1,4 @@
-function [ ptr str rtr ]  = maintest( pt, st, rt )
+function [ ptr str rtr ]  = maintest( pt, st, rt, fname)
 %This function performs all the same steps as main.m
 % Though here there are additions to cover iterating through all training
 % and perform all tests.
@@ -19,8 +19,9 @@ function [ ptr str rtr ]  = maintest( pt, st, rt )
   naive_training = [];
   naive_classes = {};
   
+  % fname = 'naive_training.txt';
   % load the pre-calculated moment invariant descriptors
-  all_moms = importdata('naive_training.txt');
+  all_moms = importdata(fname);
   p_test = [];
   s_test = [];
   r_test = [];
@@ -29,40 +30,45 @@ function [ ptr str rtr ]  = maintest( pt, st, rt )
   rt_num = rt;
   
   % repopulate the moms and easily choose test mom
-  for i = 1 : 8
+%   for i = 1 : 8
+%     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+%     if (i==pt_num)
+%       p_test = mom;
+%     else
+%       naive_training = [naive_training ; mom];
+%     end
+%   end
+%   for i = 9 : 16
+%     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+%     if (i==(st_num+8))
+%       s_test = mom;
+%     else
+%       naive_training = [naive_training ; mom];
+%     end
+%   end
+%   for i = 17 : 24
+%     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
+%     if (i==(rt_num+16))
+%       r_test = mom;
+%     else
+%       naive_training = [naive_training ; mom];
+%     end
+%   end
+  for i = 1 : 24
     mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i==pt_num)
-      p_test = mom;
-    else
-      naive_training = [naive_training ; mom];
-    end
-  end
-  for i = 9 : 16
-    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i==(st_num+8))
-      s_test = mom;
-    else
-      naive_training = [naive_training ; mom];
-    end
-  end
-  for i = 17 : 24
-    mom = [all_moms(i,1) all_moms(i,2) all_moms(i,3) all_moms(i,4) all_moms(i,5) all_moms(i,6) all_moms(i,7)];
-    if (i==(rt_num+16))
-      r_test = mom;
-    else
-      naive_training = [naive_training ; mom];
-    end
+    
+    naive_training = [naive_training ; mom];
   end
   
   % there are 7 of each class used to train the classifier
-  for i=1 : 21
-    if (i<=7)
+  for i=1 : 24
+    if (i<=8)
       naive_classes{i} = 'paper';
     end
-    if (i>7 && i<=14)
+    if (i>8 && i<=16)
       naive_classes{i} = 'scissors';
     end
-    if (i>14)
+    if (i>16)
       naive_classes{i} = 'rock';
     end
   end

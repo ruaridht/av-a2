@@ -15,8 +15,8 @@ function images = removeBackgroundFromImageSet( bgImages, imageDir )
        currentimage = bgremove(currentimage,bgImages);
        
        %clean image
-       currentimage = cleanup(currentimage,3,0,0);
-       currentimage = bwareaopen(currentimage,700);
+       currentimage = cleanup(currentimage,3,0,0); %maybe 5,3,0
+       %currentimage = bwareaopen(currentimage,4000);
        
        %store the image
        images{i} = currentimage;
