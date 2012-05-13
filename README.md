@@ -1,14 +1,12 @@
-# AV Practical 2 #
+# Image Processing and Classification (AV2) #
 Luke Brown & Ruaridh Thomson
 
-## Task ##
-Write a set of programs that can:
-* detect the moving hand against the background,
-* compute a bounding box that surrounds the moving hand/arm in all frames in a given action (i.e. all frames in a subdirectory).
-* computing a Motion History Image for the action,
-* computing a moment invariant descriptor of the motion,
-* train and test a classifier for the three actions.
+Image processing techniques and a simple Naive Bayes classifier, done in MATLAB.
+(For Advanced Vision, UG4)
 
-## Notes ##
-To be done in MATLAB.
-5-page (~2500 words) report.
+## What does it do? ##
+* detects a moving hand against a background (using background removal)
+* computes a bounding box that surrounds the moving hand/arm in all frames in a given action (i.e. all frames in a subdirectory).
+* computes a Motion History Image for the action,
+* computes a moment invariant descriptor of the motion,
+* trains and tests a Naive Bayes classifier for the three actions (rock, paper, scissors).
